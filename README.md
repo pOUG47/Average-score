@@ -2,9 +2,10 @@
 Користувач вводить 5 оцінок (програма запитує кожну оцінку окремо в циклі). Після введення всіх оцінок програма має розрахувати та вивести середній бал. 
 
 import tkinter as tk
+
 from statistics import mean
 
-#                         ВВЕДЕННЯ 
+#                       ВВЕДЕННЯ 
 
 def validate_input(event, index):
     
@@ -41,11 +42,13 @@ def calculate():
         nums = [int(e.get()) for e in entries]   # Збираємо усі значення як числа
 
         #      Якщо є хоч одна помилка праворуч — не рахуємо
+        
         if any(lbl.cget("text") != "" for lbl in error_labels):
             result_label.config(text="Виправте помилки!", fg="red")
             return
         
         #      Обчислення середнього 
+        
         avg = mean(nums)
         result_label.config(text=f"Середнє арифметичне: {avg}", fg="black")
 
@@ -53,6 +56,7 @@ def calculate():
         result_label.config(text="Заповніть всі поля!", fg="red")
 
 #                               ГОЛОВНЕ ВІКНО 
+
 window = tk.Tk()
 window.title("Середнє арифметичне")
 window.geometry("400x400")
@@ -70,6 +74,7 @@ frame = tk.Frame(window)
 frame.pack()
 
 #                            СТВОРЕННЯ 5 ПОЛІВ ВВОДУ 
+
 for i in range(5):
     row = tk.Frame(frame)     # Стрічка (поле + текст помилки)
     row.pack(pady=3)
@@ -92,10 +97,12 @@ for i in range(5):
     error_labels.append(error_label)
 
 # Кнопка обчислення
+
 button = tk.Button(window, text="Обчислити", font=("Times New Roman", 14), command=calculate)
 button.pack(pady=15)
 
 # Результат середнього
+
 result_label = tk.Label(window, text="Середнє арифметичне: ...", font=("Times New Roman", 14))
 result_label.pack(pady=10)
 
