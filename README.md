@@ -1,14 +1,15 @@
 # Середній бал
 Користувач вводить 5 оцінок (програма запитує кожну оцінку окремо в циклі). Після введення всіх оцінок програма має розрахувати та вивести середній бал. 
 
-import tkinter as tk
+    import tkinter as tk
 
-from statistics import mean
+    from statistics import mean
 
 #                       ВВЕДЕННЯ 
 
-def validate_input(event, index):
-    
+
+
+    def validate_input(event, index):
     value = entries[index].get()      # Беремо текст з поля
     if value == "":
         error_labels[index].config(text="")  # Якщо пусто — помилки нема
@@ -28,18 +29,19 @@ def validate_input(event, index):
         error_labels[index].config(text="")    # Якщо все норм — чистимо помилку
 
 #                      ПЕРЕХІД між полями стрілками 
-def focus_next(event, index):
-    if index < len(entries) - 1:
-        entries[index + 1].focus()    # Стрілка вниз → наступне поле
 
-def focus_prev(event, index):
-    if index > 0:
-        entries[index - 1].focus()    # Стрілка вгору → попереднє поле
+    def focus_next(event, index):
+        if index < len(entries) - 1:
+            entries[index + 1].focus()    # Стрілка вниз → наступне поле
+
+    def focus_prev(event, index):
+        if index > 0:
+            entries[index - 1].focus()    # Стрілка вгору → попереднє поле
 
 #                       ОБЧИСЛЕННЯ СЕРЕДНЬОГО 
-def calculate():
-    try:
-        nums = [int(e.get()) for e in entries]   # Збираємо усі значення як числа
+    def calculate():
+        try:
+            nums = [int(e.get()) for e in entries]   # Збираємо усі значення як числа
 
         #      Якщо є хоч одна помилка праворуч — не рахуємо
         
@@ -56,28 +58,28 @@ def calculate():
         result_label.config(text="Заповніть всі поля!", fg="red")
 
 #                               ГОЛОВНЕ ВІКНО 
+    window = tk.Tk()
+    window.title("Середнє арифметичне")
+    window.geometry("400x400")
 
-window = tk.Tk()
-window.title("Середнє арифметичне")
-window.geometry("400x400")
+    # Заголовок
+    title = tk.Label(window, text="Введіть 5 оцінок (0–12)", font=("Times New Roman", 16))
+    title.pack(pady=10)
 
-# Заголовок
-title = tk.Label(window, text="Введіть 5 оцінок (0–12)", font=("Times New Roman", 16))
-title.pack(pady=10)
+    # Списки для полів вводу та помилок
+    entries = []
+    error_labels = []
 
-# Списки для полів вводу та помилок
-entries = []
-error_labels = []
-
-# Блок для рядків
-frame = tk.Frame(window)
-frame.pack()
+    # Блок для рядків
+    frame = tk.Frame(window)
+    frame.pack()
+ 
 
 #                            СТВОРЕННЯ 5 ПОЛІВ ВВОДУ 
 
-for i in range(5):
-    row = tk.Frame(frame)     # Стрічка (поле + текст помилки)
-    row.pack(pady=3)
+    for i in range(5):
+        row = tk.Frame(frame)     # Стрічка (поле + текст помилки)
+        row.pack(pady=3)
 
     entry = tk.Entry(row, font=("Times New Roman", 14), justify="center", width=10)
     entry.pack(side="left")
@@ -96,15 +98,15 @@ for i in range(5):
     entries.append(entry)
     error_labels.append(error_label)
 
-# Кнопка обчислення
+    # Кнопка обчислення
 
-button = tk.Button(window, text="Обчислити", font=("Times New Roman", 14), command=calculate)
-button.pack(pady=15)
+    button = tk.Button(window, text="Обчислити", font=("Times New Roman", 14), command=calculate)
+    button.pack(pady=15)
 
-# Результат середнього
+    # Результат середнього
 
-result_label = tk.Label(window, text="Середнє арифметичне: ...", font=("Times New Roman", 14))
-result_label.pack(pady=10)
+    result_label = tk.Label(window, text="Середнє арифметичне: ...", font=("Times New Roman", 14))
+    result_label.pack(pady=10)
 
-window.mainloop()
+    window.mainloop()
 
